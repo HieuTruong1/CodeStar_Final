@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonBase {
 	public WebDriver driver;
-	public int initwaitTime = 40;
+	public int initwaitTime = 10;
 	
 	
 	public WebDriver initChromeDriver() throws InterruptedException {
@@ -107,5 +107,19 @@ public class CommonBase {
 				driver.switchTo().window(window);
 			}
 		}
+	}
+	
+	public void typeInElement(By locator, String key) {
+		WebElement e = getElementInDOM(locator);
+		e.sendKeys(key);
+	}
+	
+	public boolean isPresent(By locator) {
+	    try {
+	    	 driver.findElement(locator);
+	         return true;   
+	    } catch (org.openqa.selenium.NoSuchElementException e) {
+	    	return false;
+	    }
 	}
 }
