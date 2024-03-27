@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CommonBase {
 	public WebDriver driver;
-	public int initwaitTime = 10;
+	public int initwaitTime = 40;
 	
 	
 	public WebDriver initChromeDriver() throws InterruptedException {
@@ -65,12 +66,12 @@ public class CommonBase {
 	}
 	
 	public WebElement getElementInDOM(By locator) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return driver.findElement(locator);
 	}
 	
-	public void pauseInSecond (Long time) {
+	public void pauseInSecond (long time) {
 		try {
 			Thread.sleep(time);
 		} catch (Exception e) {
@@ -90,7 +91,7 @@ public class CommonBase {
 	
 	public void clickElement(By locator) {
 		WebElement e = getElementInDOM(locator);
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.elementToBeClickable(e));
 		e.click();
 	}
@@ -109,9 +110,26 @@ public class CommonBase {
 		}
 	}
 	
+	public void clickElementWithJS(By locator) {
+		WebElement element = getElementInDOM(locator);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", element);
+	}
+	
 	public void typeInElement(By locator, String key) {
 		WebElement e = getElementInDOM(locator);
 		e.sendKeys(key);
+	}
+	
+	public void typeInElementEnter(By locator) {
+		WebElement e = getElementInDOM(locator);
+		e.sendKeys(Keys.ENTER);
+	}
+	
+	public void typeInElementTab(By locator) {
+		WebElement e = getElementInDOM(locator);
+		e.clear();
+		e.sendKeys(Keys.TAB);
 	}
 	
 	public boolean isPresent(By locator) {
