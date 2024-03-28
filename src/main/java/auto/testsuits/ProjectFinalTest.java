@@ -15,39 +15,41 @@ import org.testng.annotations.Test;
 import auto.common.CommonBase;
 import auto.constants.CT_ACCOUNT;
 import auto.constants.Common_URL;
-import auto.constants.TEST_DATA;
 import auto.pages.RiseFunctions;
 
 public class ProjectFinalTest extends CommonBase{
+	private String userAdmin = "admin@demo.com";
+	private String userClient = "client@demo.com";
+	private String password = "riseDemo";
+	private String projectTab = "Projects";
 	
-	private String userAdmin = TEST_DATA.RISE_USER_ADMIN;
-	private String userClient = TEST_DATA.RISE_USER_CLIENT;
-	private String password = TEST_DATA.RISE_PASS;
-	private String projectTab = TEST_DATA.PROJECT_TAB;
+	//Drop down box item
+	private String filtersItem = "Filters";
+	private String allProjectsItem = "All projects";
+	private String completedItem = "Completed";
+	private String highPriorItem = "High Priority";
+	private String openItem = "Open projects";
+	private String upComingItem = "Upcoming";
 	
-	private String filtersItem = TEST_DATA.FILTERS;
-	private String allProjectsItem = TEST_DATA.ALL_PROJECTS;
-	private String completedItem = TEST_DATA.COMPLETED;
-	private String highPriorItem = TEST_DATA.HIGH_PRIORITY;
-	private String openItem = TEST_DATA.OPEN_PROJECTS;
-	private String upComingItem = TEST_DATA.UPCOMING;
+	//Filter bar items
+	private String allProjectsBTN = "ecmkusuchl";
+	private String completedBTN = "tiyhayaffv";
+	private String highPriorBTN = "nkuyhedude";
+	private String openBTN = "ohenbtrdgc";
+	private String upComingBTN = "gncqxkcoto";
 	
-	private String allProjectsBTN = TEST_DATA.ALL_PROJECT_BTN;
-	private String completedBTN = TEST_DATA.COMPLETED_BTN;
-	private String highPriorBTN = TEST_DATA.HIGH_PRIORITY_BTN;
-	private String openBTN = TEST_DATA.OPEN_PROJECTS_BTN;
-	private String upComingBTN = TEST_DATA.UPCOMING_BTN;
+	//Show option
+	private String optionAll = "All";
+	private String option100 = "100";
+	private String option50 = "50";
+	private String option25 = "25";
+	private String option10 = "10";
 	
-	private String optionAll = TEST_DATA.OPTION_ALL;
-	private String option100 = TEST_DATA.OPTION_100;
-	private String option50 = TEST_DATA.OPTION_50;
-	private String option25 = TEST_DATA.OPTION_25;
-	private String option10 = TEST_DATA.OPTION_10;
-	
-	private String completeStatus = TEST_DATA.COMPLETE_STATUS;
-	private String openStatus = TEST_DATA.OPEN_STATUS;
-	private String highPriorTag = TEST_DATA.HIGH_PRIOR_TAG;
-	private String upcomingTag = TEST_DATA.UPCOMING_TAG;
+	//Project status
+	private String completeStatus = "Completed";
+	private String openStatus = "Open";
+	private String highPriorTag = "High Priority";
+	private String upcomingTag = "Upcoming";
 	
 	
 	@BeforeMethod
@@ -210,5 +212,8 @@ public class ProjectFinalTest extends CommonBase{
 		assertEquals(highPriorCount, tableRow);
 		// verify the dropbox text matched with the current filter option  
 		assertEquals(textDropbox.getText(), "High Priority");
-		}	
+		}
+	public void createFilterWithOnTrackLablel() {
+		
+	}
 }
