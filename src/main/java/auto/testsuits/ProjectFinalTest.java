@@ -1,6 +1,7 @@
 package auto.testsuits;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 import java.util.concurrent.TimeUnit;
 
@@ -48,13 +49,22 @@ public class ProjectFinalTest extends CommonBase{
 	//Project status
 	private String completeStatus = "Completed";
 	private String openStatus = "Open";
+	private String holdStatus = "Hold";
+	private String cancelStatus = "Canceled";
+	
+	//Tags
+	private String onTrackTag = "On track";
+	private String urgentTag = "Urgent";
+	private String perfectTag = "Perfect";
 	private String highPriorTag = "High Priority";
 	private String upcomingTag = "Upcoming";
+	private String startDate = "21-09-2020";
+	private String deadLine = "10-03-2027";
 	
 	
 	@BeforeMethod
 	@Parameters ("browserName")
-	public void initBrowser (@Optional("firefox") String browserValue) throws InterruptedException {
+	public void initBrowser (@Optional("c") String browserValue) throws InterruptedException {
 		setupDriver(browserValue);
 		driver.get(Common_URL.URLRise);
 		RiseFunctions fc = new RiseFunctions(driver);
@@ -70,7 +80,7 @@ public class ProjectFinalTest extends CommonBase{
 	public void fillterProjectsWithAllProjectsTag () throws InterruptedException {
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(allProjectsBTN);
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		int count = fc.splitProjectCount(CT_ACCOUNT.TABLE_COUNT_NUMBER);
@@ -90,11 +100,11 @@ public class ProjectFinalTest extends CommonBase{
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(completedBTN);
 		
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
-		int completeCount = fc.countTag(CT_ACCOUNT.COMPLETE_PROJECTS, completeStatus);
+		int completeCount = fc.countTag(CT_ACCOUNT.STATUS_PROJECTS(completeStatus), completeStatus);
 		
 		System.out.println("Total row that driver has count: "+tableRow);
 		System.out.println("Total row that have status as 'Completed'  driver has count: "+completeCount);
@@ -110,7 +120,7 @@ public class ProjectFinalTest extends CommonBase{
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(openBTN);
 		
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
@@ -130,12 +140,12 @@ public class ProjectFinalTest extends CommonBase{
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(highPriorBTN);
 		
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		//int count = fc.splitProjectCount(CT_ACCOUNT.TABLE_COUNT_NUMBER);
 		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
-		int highPriorCount = fc.countTag(CT_ACCOUNT.HIGH_PRIOR_PROJECTS, highPriorTag);
+		int highPriorCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(highPriorTag), highPriorTag);
 		
 		System.out.println("Total row that driver has count: "+tableRow);
 		System.out.println("Total row that have tags as 'High Priority'  driver has count: "+highPriorCount);
@@ -151,12 +161,12 @@ public class ProjectFinalTest extends CommonBase{
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(upComingBTN);
 		
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		//int count = fc.splitProjectCount(CT_ACCOUNT.TABLE_COUNT_NUMBER);
 		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
-		int upcomingCount = fc.countTag(CT_ACCOUNT.UPCOMING_PROJECTS, upcomingTag);
+		int upcomingCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(upcomingTag), upcomingTag);
 		
 		System.out.println("Total row that driver has count: "+tableRow);
 		System.out.println("Total row that have tags as 'Upcoming'  driver has count: "+upcomingCount);
@@ -171,7 +181,7 @@ public class ProjectFinalTest extends CommonBase{
 	public void clearFilterSuccessfully () throws InterruptedException {
 		RiseFunctions fc = new RiseFunctions(driver);
 		fc.getToFilterButton(upComingBTN);
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		pauseInSecond(3500);
 		fc.clearFilter();
 		pauseInSecond(2000);
@@ -190,20 +200,14 @@ public class ProjectFinalTest extends CommonBase{
 	@Test (priority = 7) //Search filter (Ex: Data = "High Priority")
 	public void searchFilterSuccessfully () throws InterruptedException {
 		RiseFunctions fc = new RiseFunctions(driver);
-		clickElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
-		By dropBox = CT_ACCOUNT.RISE_PROJECTS_DROP_BOX;
-		clickElementWithJS(dropBox);
-		pauseInSecond(3000);
-		By searchBar = CT_ACCOUNT.FILTERS_SEARCH_BOX;
-		typeInElement(searchBar, highPriorItem);
-		typeInElementEnter(searchBar);
+		fc.searchFilter(highPriorItem);
 		
-		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
+		WebElement textDropbox = getElementInDOM(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
 		fc.showAllProject();
 		
 		//int count = fc.splitProjectCount(CT_ACCOUNT.TABLE_COUNT_NUMBER);
 		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
-		int highPriorCount = fc.countTag(CT_ACCOUNT.HIGH_PRIOR_PROJECTS, highPriorTag);
+		int highPriorCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(highPriorTag), highPriorTag);
 		
 		System.out.println("Total row that driver has count: "+tableRow);
 		System.out.println("Total row that have tags as 'High Priority'  driver has count: "+highPriorCount);
@@ -213,7 +217,153 @@ public class ProjectFinalTest extends CommonBase{
 		// verify the dropbox text matched with the current filter option  
 		assertEquals(textDropbox.getText(), "High Priority");
 		}
-	public void createFilterWithOnTrackLablel() {
+	
+	@Test (priority = 8) //Create custom filter with "On track" label
+	public void createFilterWithOnTrackLablel() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithLabel(onTrackTag, startDate, deadLine);
+		fc.createFilterName(onTrackTag);
 		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int ontrackCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(onTrackTag), onTrackTag);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'On Track'  driver has count: "+ontrackCount);
+		
+		 // verify number of projects that have On track tag compare to total of projects that was count by driver
+		assertEquals(ontrackCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 9) //Create custom filter with "Urgent" label
+	public void createFilterWithUrgenLablel() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithLabel(urgentTag, startDate, deadLine);
+		fc.createFilterName(urgentTag);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int urgentCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(urgentTag), urgentTag);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'Urgent'  driver has count: "+urgentCount);
+		
+		 // verify number of projects that have Urgent tag compare to total of projects that was count by driver
+		assertEquals(urgentCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 10) //Create custom filter with "Perfect" label
+	public void createFilterWithPerfectLablel() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithLabel(perfectTag, startDate, deadLine);
+		fc.createFilterName(perfectTag);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int perfectCount = fc.countTag(CT_ACCOUNT.PROJECT_TAGS(perfectTag), perfectTag);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'Perfect'  driver has count: "+perfectCount);
+		
+		 // verify number of projects that have Perfect tag compare to total of projects that was count by driver
+		assertEquals(perfectCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 11) //Not type name when create custom filter
+	public void createFilterWithNoName() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithLabel(perfectTag, startDate, deadLine);
+		fc.createFilterName("");
+		
+		WebElement requireMsg = driver.findElement(CT_ACCOUNT.REQUIRE_NAME);
+		pauseInSecond(2000);
+		 // verify number of projects that have High Priority tag compare to total of projects that was count by driver
+		assertTrue(requireMsg.isDisplayed());
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 12)//Create custom filter with "Hold" Status
+	public void createFilterWithHoldStatus() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithStatus(holdStatus, startDate, deadLine);
+		fc.createFilterName(holdStatus);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int holdCount = fc.countTag(CT_ACCOUNT.STATUS_PROJECTS(holdStatus), holdStatus);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'On Track'  driver has count: "+holdCount);
+		
+		 // verify number of projects that have Hold status compare to total of projects that was count by driver
+		assertEquals(holdCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 13)//Create custom filter with "Cancel" Status
+	public void createFilterWithCancelStatus() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithStatus(cancelStatus, startDate, deadLine);
+		fc.createFilterName(cancelStatus);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int cancelCount = fc.countTag(CT_ACCOUNT.STATUS_PROJECTS(cancelStatus), cancelStatus);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'On Track'  driver has count: "+cancelCount);
+		
+		 // verify number of projects that have Hold status compare to total of projects that was count by driver
+		assertEquals(cancelCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 14)//Create custom filter with "Completed" Status
+	public void createFilterWithCompletedStatus() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithStatus(completeStatus, startDate, deadLine);
+		fc.createFilterName(completeStatus);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int completedCount = fc.countTag(CT_ACCOUNT.STATUS_PROJECTS(completeStatus), completeStatus);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'Completed'  driver has count: "+completedCount);
+		
+		 // verify number of projects that have Hold status compare to total of projects that was count by driver
+		assertEquals(completedCount, tableRow);
+		pauseInSecond(2000);
+	}
+	
+	@Test (priority = 15)//Create custom filter with "Open" Status
+	public void createFilterWithOpenStatus() throws InterruptedException {
+		RiseFunctions fc = new RiseFunctions(driver);
+		fc.createFilterWithStatus(openStatus, startDate, deadLine);
+		fc.createFilterName(openStatus);
+		
+		pauseInSecond(2000);
+		fc.showAllProject();
+		int tableRow = driver.findElements(CT_ACCOUNT.TABLE_ROW).size();
+		int completedCount = fc.countTag(CT_ACCOUNT.STATUS_PROJECTS(openStatus), openStatus);
+		
+		System.out.println("Total row that driver has count: "+tableRow);
+		System.out.println("Total row that have tags as 'openStatus'  driver has count: "+completedCount);
+		
+		 // verify number of projects that have Hold status compare to total of projects that was count by driver
+		assertEquals(completedCount, tableRow);
+		pauseInSecond(2000);
 	}
 }

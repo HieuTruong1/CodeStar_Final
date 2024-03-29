@@ -19,9 +19,123 @@ public class RiseFunctions{
 	private WebDriver driver;
 	private String projectTab = "Projects";
 	private String optionAll = "All";
+	private String openStatus = "Open";
 
 	public RiseFunctions(WebDriver d) {
 		this.driver = d;
+	}
+
+	public void pickDateFunction (String date) throws InterruptedException {
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
+		WebElement pickTable = driver.findElement(CT_ACCOUNT.DATE_PICKER);
+		WebElement dateMY = driver.findElement(CT_ACCOUNT.MONTH_YEAR);
+		checkCalendar(dateMY, date);
+		
+		String[] splitInputDate = splitInput(date);
+		String inputDay = splitInputDate[0];
+		WebElement day = driver.findElement(CT_ACCOUNT.DAY(inputDay));
+		wait.until(ExpectedConditions.elementToBeClickable(day));
+		day.click();
+	}
+	
+	public void LoginFunction(String email, String pass) {
+		CommonBase cm = new CommonBase(driver);
+		cm.typeInElement(CT_ACCOUNT.RISE_USER, email);
+		cm.typeInElement(CT_ACCOUNT.RISE_PASS, pass);
+		cm.clickElement(CT_ACCOUNT.RISE_SUBMIT);
+	}
+	
+	public void getToFilterButton (String button) throws InterruptedException {
+		CommonBase cm = new CommonBase(driver);
+		cm.clickElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
+		cm.pauseInSecond(1500); // for firefox
+		cm.clickElement(CT_ACCOUNT.RISE_FILTER_ITEMS(button));
+	}
+	
+	public void createFilterWithLabel (String labelName, String startDate, String deadLine) throws InterruptedException {
+		CommonBase cm = new CommonBase(driver);
+		cm.clickElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
+		cm.pauseInSecond(1500); //for firefox
+		cm.clickElement(CT_ACCOUNT.CREATE_CUSTOM_FILTER_BTN);
+		cm.clickElement(CT_ACCOUNT.LABEL_DROP);
+		
+		WebElement labelSearch = driver.findElement(CT_ACCOUNT.LABEL_SEARCH);
+		labelSearch.sendKeys(labelName);
+		//cm.typeInElement(CT_ACCOUNT.LABEL_SEARCH, labelName);
+		cm.typeInElementEnter(CT_ACCOUNT.LABEL_SEARCH);
+		
+		cm.clickElement(CT_ACCOUNT.START_FROM_BTN);
+		pickDateFunction(startDate);
+		cm.clickElement(CT_ACCOUNT.DEADLINE_BTN);
+		pickDateFunction(deadLine);
+		
+		cm.clickElement(CT_ACCOUNT.ACCEPT_BTN);
+	}
+	
+	public void createFilterWithStatus (String statuslName, String startDate, String deadLine) throws InterruptedException {
+		CommonBase cm = new CommonBase(driver);
+		cm.clickElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
+		cm.pauseInSecond(3000);
+		cm.clickElement(CT_ACCOUNT.CREATE_CUSTOM_FILTER_BTN);
+		cm.clickElement(CT_ACCOUNT.STATUS_DROP);
+		
+		if (statuslName.equalsIgnoreCase(openStatus)) {	
+			//open status is active by default
+		}
+		else {
+			//turn of open status 
+			cm.clickElement(CT_ACCOUNT.STATUS_ITEMS(openStatus));
+			cm.pauseInSecond(1000);
+			cm.clickElement(CT_ACCOUNT.STATUS_ITEMS(statuslName));
+		}
+		cm.clickElement(CT_ACCOUNT.ACCEPT_BTN);
+	}
+	
+	public void createFilterName (String name) {
+		CommonBase cm = new CommonBase(driver);
+		cm.typeInElement(CT_ACCOUNT.CUSTTOM_TITLE_INPUT, name);
+		if (!(driver.findElement(CT_ACCOUNT.BOOKMARK_CHECKBOX).isSelected())) {
+			cm.clickElement(CT_ACCOUNT.BOOKMARK_CHECKBOX);
+		}
+		cm.clickElement(CT_ACCOUNT.SAVE_NAME_BTN);
+	}
+	
+	public void showAllProject() throws InterruptedException {
+		CommonBase cm = new CommonBase(driver);
+		cm.pauseInSecond(300);
+		cm.scrollToElement(CT_ACCOUNT.TABLE_SHOW_SELECTION_DROP);
+		cm.clickElement(CT_ACCOUNT.TABLE_SHOW_SELECTION_DROP);
+		cm.clickElement(CT_ACCOUNT.SHOW_OPTION(optionAll));
+		cm.pauseInSecond(2000);
+	}
+	
+	public void clearFilter () {
+		CommonBase cm = new CommonBase(driver);
+		cm.clickElement(CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX);
+		cm.clickElement(CT_ACCOUNT.CLEAR_BTN);
+	}
+	
+	public void searchFilter (String filterName) {
+		CommonBase cm = new CommonBase(driver);
+		cm.clickElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
+		By dropBox = CT_ACCOUNT.FILTER_PROJECTS_DROP_BOX;
+		cm.clickElementWithJS(dropBox);
+		cm.pauseInSecond(3000);
+		By searchBar = CT_ACCOUNT.FILTERS_SEARCH_BOX;
+		cm.typeInElement(searchBar, filterName);
+		cm.typeInElementEnter(searchBar);
+	}
+	
+	public int countTag(By locator , String tagName) {
+		int a = 0;
+		List<WebElement> ls = driver.findElements(locator);
+		for (WebElement e : ls){
+			if(e.getText().equalsIgnoreCase(tagName)) {
+				a++;
+			}
+		}
+		return a;
 	}
 	
 	public int splitProjectCount (By locator) { //get the total item of the project table 
@@ -40,7 +154,7 @@ public class RiseFunctions{
 	public String[] splitMonthYear(WebElement e) {
 		String monthYear = e.getText();
 		String[] split = monthYear.split("\\s");
-		return split;
+		return split; 
 	}
 	
 	public String getElementMonth (String[] ls) {
@@ -70,10 +184,10 @@ public class RiseFunctions{
 		
 		if (year < eYear) {
 			do {
-					prepBtn.click();
-				 	eMonth = convertMonthToNumber(getElementMonth(splitMonthYear(e)));
-					eYear = Integer.parseInt(getElementYear(splitMonthYear(e))) ;
-					System.out.println("eMonth: "+eMonth+" eYear"+eYear);
+				prepBtn.click();
+			 	eMonth = convertMonthToNumber(getElementMonth(splitMonthYear(e)));
+				eYear = Integer.parseInt(getElementYear(splitMonthYear(e))) ;
+				System.out.println("eMonth: "+eMonth+" eYear"+eYear);
 			} while (!(month==eMonth && year == eYear));
 		}
 		else if (year > eYear) {
@@ -100,81 +214,9 @@ public class RiseFunctions{
 		}
 	}
 	
-	public void pickDateFunction (String date) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
-		WebElement pickTable = driver.findElement(CT_ACCOUNT.DATE_PICKER);
-		WebElement dateMY = driver.findElement(CT_ACCOUNT.MONTH_YEAR);
-		checkCalendar(dateMY, date);
-		
-		String[] splitInputDate = splitInput(date);
-		String inputDay = splitInputDate[0];
-		WebElement day = driver.findElement(CT_ACCOUNT.DAY(inputDay));
-		wait.until(ExpectedConditions.elementToBeClickable(day));
-		day.click();
-	}
-	
-	public void LoginFunction(String email, String pass) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
-		wait.until(ExpectedConditions.elementToBeClickable(CT_ACCOUNT.RISE_SUBMIT));
-		
-		WebElement txt_user = driver.findElement(CT_ACCOUNT.RISE_USER);
-		WebElement txt_pass = driver.findElement(CT_ACCOUNT.RISE_PASS);
-		WebElement btn_submit = driver.findElement(CT_ACCOUNT.RISE_SUBMIT);
-		txt_user.clear();
-		txt_user.sendKeys(email);
-		txt_pass.clear();
-		txt_pass.sendKeys(pass);
-		btn_submit.click();
-	}
-	
-	public void getToFilterButton (String button) throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
-		wait.until(ExpectedConditions.elementToBeClickable(CT_ACCOUNT.SIDEBAR_MENU(projectTab)));
-		WebElement sideBar = driver.findElement(CT_ACCOUNT.SIDEBAR_MENU(projectTab));
-		sideBar.click();
-		
-		Thread.sleep(2000);
-		
-		wait.until(ExpectedConditions.elementToBeClickable(CT_ACCOUNT.RISE_FILTER_ITEMS(button)));
-		WebElement filterButton = driver.findElement(CT_ACCOUNT.RISE_FILTER_ITEMS(button));
-		filterButton.click();
-	}
-	
-	public void showAllProject() throws InterruptedException {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		WebElement drop = driver.findElement(CT_ACCOUNT.TABLE_SHOW_SELECTION_DROP);
-		
-		js.executeScript("arguments[0].scrollIntoView(true);", drop);
-		wait.until(ExpectedConditions.elementToBeClickable(drop));
-		drop.click();
-		
-		WebElement all = driver.findElement(CT_ACCOUNT.SHOW_OPTION(optionAll));
-		wait.until(ExpectedConditions.elementToBeClickable(all));
-		all.click();
-		Thread.sleep(3000);
-	}
-	
-	public void clearFilter () {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(initwaitTime));
-		WebElement dropBox = driver.findElement(CT_ACCOUNT.RISE_PROJECTS_DROP_BOX);
-		wait.until(ExpectedConditions.elementToBeClickable(dropBox));
-		dropBox.click();
-		
-		WebElement clearBtn = driver.findElement(CT_ACCOUNT.CLEAR_BTN);
-		wait.until(ExpectedConditions.elementToBeClickable(clearBtn));
-		clearBtn.click();
-	}
-	
-	public int countTag(By locator , String tagName) {
-		int a = 0;
-		List<WebElement> ls = driver.findElements(locator);
-		for (WebElement e : ls){
-			if(e.getText().equalsIgnoreCase(tagName)) {
-				a++;
-			}
-		}
-		return a;
+	public boolean checkActive (String s) {
+		boolean check = s.contains("active");
+		return check;
 	}
 	
 	public int convertMonthToNumber (String month) {

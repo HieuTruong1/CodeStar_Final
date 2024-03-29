@@ -13,11 +13,12 @@ public class CT_ACCOUNT {
 	public static By TABLE_SHOW_SELECTION_DROP = By.xpath("//span[@id = 'select2-chosen-2' ]/parent::a");
 	public static By TABLE_ROW = By.xpath("//tbody/child::tr");
 	public static By STATUS_COLUMN = By.xpath("//thead/descendant::th[text() = 'Status']");
-	public static By COMPLETE_PROJECTS = By.xpath("//tbody//descendant::td[text() = 'Completed']");
+	
 	public static By OPEN_PROJECTS = By.xpath("//tbody//descendant::td[text() = 'Open']");
-	public static By HIGH_PRIOR_PROJECTS = By.xpath("//tr//descendant::span[text() = 'High Priority']");
-	public static By UPCOMING_PROJECTS = By.xpath("//tr//descendant::span[text() = 'Upcoming']");
-	public static By RISE_PROJECTS_DROP_BOX = By.xpath("//div[@class = 'filter-section-left']//descendant::button[contains(@class, 'dropdown')]");
+	public static By PROJECT_TAGS (String tagName) {
+		return By.xpath("//tr//descendant::span[text() = '"+tagName+"']");
+	};
+	public static By FILTER_PROJECTS_DROP_BOX = By.xpath("//div[@class = 'filter-section-left']//descendant::button[contains(@class, 'dropdown')]");
 	public static By CLEAR_BTN = By.xpath("//a[text() = 'Clear']");
 	public static By FILTERS_SEARCH_BOX = By.xpath("//input[@type = 'text' and @placeholder = 'Search']");
 	
@@ -33,6 +34,25 @@ public class CT_ACCOUNT {
 		return By.xpath("//td[@class = 'day' and text() = '"+day+"']");
 	}
 	
+	//custom label
+	public static By STATUS_DROP =	By.xpath("//button[text() = 'Status ']");
+	public static By LABEL_DROP = By.xpath("//div[@id = 's2id_autogen3']");
+	public static By LABEL_SEARCH = By.xpath("//div[@class = 'select2-search']/child::input");
+	public static By ACCEPT_BTN = By.xpath("//button[@class = 'btn btn-default save-filter-button']");
+	public static By CANCEL_BTN = By.xpath("//button[@class = 'btn btn-default cancel-filter-button']");
+	
+	//custom label name
+	public static By CUSTTOM_TITLE_INPUT = By.xpath("//input[@placeholder = 'Title']");
+	public static By BOOKMARK_CHECKBOX = By.id("bookmark_input");
+	public static By SAVE_NAME_BTN = By.xpath("//button[text() = ' Save']");
+	
+	public static By STATUS_PROJECTS (String status) {
+		return By.xpath("//tbody//descendant::td[text() = '"+status+"']");
+	} 
+	
+	public static By STATUS_ITEMS (String status) {
+		return By.xpath("//li[@data-name = 'status_id' and  text() = '"+status+"']");
+	}
 	
 	public static By SHOW_OPTION (String options) {
 		return By.xpath("//div[text() = '"+options+"']");
@@ -48,5 +68,8 @@ public class CT_ACCOUNT {
 	public static By SIDEBAR_MENU (String item) {
 		return By.xpath("//ul[@id = 'sidebar-menu']/child::li//descendant::span[text() = '"+item+"']");
 	}
+	
+	//Error message 
+	public static By REQUIRE_NAME = By.xpath("//span[text() = 'This field is required.']");
 	
 }

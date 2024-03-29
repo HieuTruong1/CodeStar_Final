@@ -18,7 +18,14 @@ public class CommonBase {
 	public WebDriver driver;
 	public int initwaitTime = 40;
 	
+	public CommonBase() {
+	}
 	
+	public CommonBase(WebDriver driver) {
+		super();
+		this.driver = driver;
+	}
+
 	public WebDriver initChromeDriver() throws InterruptedException {
 		System.out.println("Chrome is launching.....");
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\driver\\chromedriver.exe");
@@ -118,6 +125,7 @@ public class CommonBase {
 	
 	public void typeInElement(By locator, String key) {
 		WebElement e = getElementInDOM(locator);
+		e.clear();
 		e.sendKeys(key);
 	}
 	
@@ -140,4 +148,22 @@ public class CommonBase {
 	    	return false;
 	    }
 	}
+	
+	public boolean isElementPresentDOM(By locator)
+	{
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(4));
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(locator));	
+			return true;
+		} catch (org.openqa.selenium.TimeoutException e) {
+			return false;
+		}
+	}
+	
+//	public boolean isElementPresent(By locator)
+//	{
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//		wait.until(ExpectedConditions.visibilityOf(getElementPresentDOM(locator)));
+//		return getElementPresentDOM(locator).isDisplayed();
+//	}
 }
