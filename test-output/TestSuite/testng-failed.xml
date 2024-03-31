@@ -6,35 +6,11 @@
     <classes>
       <class name="auto.testsuits.RiseTest">
         <methods>
-          <include name="test"/>
           <include name="closeBrowser"/>
           <include name="initBrowser"/>
+          <include name="fillterProjectsWithAllProjectsTag"/>
         </methods>
       </class> <!-- auto.testsuits.RiseTest -->
     </classes>
   </test> <!-- Run test paralell with firefox(failed) -->
-  <test thread-count="5" name="Run test paralell with edge(failed)">
-    <parameter name="browserName" value="edge"/>
-    <classes>
-      <class name="auto.testsuits.RiseTest">
-        <methods>
-          <include name="test"/>
-          <include name="closeBrowser"/>
-          <include name="initBrowser"/>
-        </methods>
-      </class> <!-- auto.testsuits.RiseTest -->
-    </classes>
-  </test> <!-- Run test paralell with edge(failed) -->
-  <test thread-count="5" name="Run test paralell with chrome(failed)">
-    <parameter name="browserName" value="chrome"/>
-    <classes>
-      <class name="auto.testsuits.RiseTest">
-        <methods>
-          <include name="test"/>
-          <include name="closeBrowser"/>
-          <include name="initBrowser"/>
-        </methods>
-      </class> <!-- auto.testsuits.RiseTest -->
-    </classes>
-  </test> <!-- Run test paralell with chrome(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->

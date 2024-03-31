@@ -1,32 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+<testng-results ignored="0" total="7" passed="7" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-03-26T17:27:25 ICT" name="Default suite" finished-at="2024-03-26T17:27:30 ICT" duration-ms="5106">
+  <suite started-at="2024-03-30T01:12:23 ICT" name="Default suite" finished-at="2024-03-30T01:13:33 ICT" duration-ms="70144">
     <groups>
     </groups>
-    <test started-at="2024-03-26T17:27:25 ICT" name="Default test" finished-at="2024-03-26T17:27:30 ICT" duration-ms="5106">
-      <class name="auto.testsuits.RiseTest">
-        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.RiseTest@437da279]" started-at="2024-03-26T17:27:25 ICT" name="initBrowser" finished-at="2024-03-26T17:27:28 ICT" duration-ms="2802" status="PASS">
+    <test started-at="2024-03-30T01:12:23 ICT" name="Default test" finished-at="2024-03-30T01:13:33 ICT" duration-ms="70144">
+      <class name="auto.testsuits.ProjectFinalTest">
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:23 ICT" name="initBrowser" finished-at="2024-03-30T01:12:27 ICT" duration-ms="4400" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[chrome]]>
+                <![CDATA[c]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initBrowser -->
-        <test-method signature="test()[pri:0, instance:auto.testsuits.RiseTest@437da279]" started-at="2024-03-26T17:27:28 ICT" name="test" finished-at="2024-03-26T17:27:30 ICT" duration-ms="2189" status="PASS">
+        <test-method signature="fillterProjectsWithAllProjectsTag()[pri:1, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:27 ICT" name="fillterProjectsWithAllProjectsTag" finished-at="2024-03-30T01:12:32 ICT" duration-ms="4668" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- test -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.RiseTest@437da279]" started-at="2024-03-26T17:27:30 ICT" name="closeBrowser" finished-at="2024-03-26T17:27:30 ICT" duration-ms="97" status="PASS">
+        </test-method> <!-- fillterProjectsWithAllProjectsTag -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:32 ICT" name="closeBrowser" finished-at="2024-03-30T01:12:32 ICT" duration-ms="92" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
-      </class> <!-- auto.testsuits.RiseTest -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:32 ICT" name="initBrowser" finished-at="2024-03-30T01:12:36 ICT" duration-ms="3953" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="fillterProjectsWithCompletedTag()[pri:2, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:36 ICT" name="fillterProjectsWithCompletedTag" finished-at="2024-03-30T01:12:41 ICT" duration-ms="4716" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillterProjectsWithCompletedTag -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:41 ICT" name="closeBrowser" finished-at="2024-03-30T01:12:41 ICT" duration-ms="99" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:41 ICT" name="initBrowser" finished-at="2024-03-30T01:12:45 ICT" duration-ms="4331" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="fillterProjectsWithOpenTag()[pri:3, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:45 ICT" name="fillterProjectsWithOpenTag" finished-at="2024-03-30T01:12:50 ICT" duration-ms="4775" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillterProjectsWithOpenTag -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:50 ICT" name="closeBrowser" finished-at="2024-03-30T01:12:50 ICT" duration-ms="97" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:50 ICT" name="initBrowser" finished-at="2024-03-30T01:12:54 ICT" duration-ms="3993" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="fillterProjectsWithHightPriorityTag()[pri:4, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:54 ICT" name="fillterProjectsWithHightPriorityTag" finished-at="2024-03-30T01:12:59 ICT" duration-ms="4745" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillterProjectsWithHightPriorityTag -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:59 ICT" name="closeBrowser" finished-at="2024-03-30T01:12:59 ICT" duration-ms="93" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:12:59 ICT" name="initBrowser" finished-at="2024-03-30T01:13:03 ICT" duration-ms="4074" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="fillterProjectsWithUpcomingTag()[pri:5, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:03 ICT" name="fillterProjectsWithUpcomingTag" finished-at="2024-03-30T01:13:08 ICT" duration-ms="4710" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- fillterProjectsWithUpcomingTag -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:08 ICT" name="closeBrowser" finished-at="2024-03-30T01:13:08 ICT" duration-ms="96" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:08 ICT" name="initBrowser" finished-at="2024-03-30T01:13:12 ICT" duration-ms="4109" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="clearFilterSuccessfully()[pri:6, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:12 ICT" name="clearFilterSuccessfully" finished-at="2024-03-30T01:13:22 ICT" duration-ms="10388" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- clearFilterSuccessfully -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:22 ICT" name="closeBrowser" finished-at="2024-03-30T01:13:23 ICT" duration-ms="87" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method is-config="true" signature="initBrowser(java.lang.String)[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:23 ICT" name="initBrowser" finished-at="2024-03-30T01:13:27 ICT" duration-ms="4383" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[c]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- initBrowser -->
+        <test-method signature="searchFilterSuccessfully()[pri:7, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:27 ICT" name="searchFilterSuccessfully" finished-at="2024-03-30T01:13:33 ICT" duration-ms="6222" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- searchFilterSuccessfully -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:auto.testsuits.ProjectFinalTest@659499f1]" started-at="2024-03-30T01:13:33 ICT" name="closeBrowser" finished-at="2024-03-30T01:13:33 ICT" duration-ms="90" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- auto.testsuits.ProjectFinalTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

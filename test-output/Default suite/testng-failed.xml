@@ -3,13 +3,18 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="auto.testsuits.RiseTest">
+      <class name="auto.testsuits.ProjectFinalTest">
         <methods>
-          <include name="test"/>
-          <include name="closeBrowser"/>
+          <include name="fillterProjectsWithCompletedTag"/>
+          <include name="fillterProjectsWithOpenTag"/>
           <include name="initBrowser"/>
+          <include name="clearFilterSuccessfully"/>
+          <include name="fillterProjectsWithHightPriorityTag"/>
+          <include name="fillterProjectsWithUpcomingTag"/>
+          <include name="searchFilterSuccessfully"/>
+          <include name="closeBrowser"/>
         </methods>
-      </class> <!-- auto.testsuits.RiseTest -->
+      </class> <!-- auto.testsuits.ProjectFinalTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
